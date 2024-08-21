@@ -13,7 +13,7 @@ export const getpostById = async (req, res) => {
             throw new Error("Invalid or missing User ID");
         } else {
 
-            const post = await Post.findOne({ _id: id }).select('-updatedAt').select('-createdAt')
+            const post = await Post.findOne({ _id: id })
 
             if (!post) {
                 return res.status(400).json({ error: 'post not found' })

@@ -6,6 +6,7 @@ import { LuMessageCircle } from "react-icons/lu"
 import { Link, useParams } from "react-router-dom"
 import { useEffect, useState } from "react"
 import toast from "react-hot-toast"
+import { formatDistanceToNow } from "date-fns"
 
 
 
@@ -47,7 +48,7 @@ const PostDetaile = () => {
         }
         getPost()
 
-    }, [id, post])
+    }, [id, post,])
 
 
 
@@ -99,6 +100,7 @@ const PostDetaile = () => {
     }, [post, id])
 
     // reply to post
+    // console.log(post);
 
     const replyToPost = async (e) => {
         e.preventDefault()
@@ -139,7 +141,7 @@ const PostDetaile = () => {
                                 </div>
                             </div>
                             <div>
-                                <span className='lg:text-[14px] text-xs lg:pl-[30px]'>12m_ago</span>
+                                <span className='lg:text-[14px] text-xs lg:pl-[30px]'>{post == "undefined" ? formatDistanceToNow(post?.createdAt) : "43m"}</span>
                             </div>
                         </div>
                     </Link>

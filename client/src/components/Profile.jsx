@@ -141,13 +141,13 @@ const Profile = () => {
             <div className=' flex justify-between items-center space-x-[150px]'>
                 <div>
                     <div>
-                        <div className=' relative'>
+                        <div className=' relative max-w-xl'>
                             <img src={user?.profilePic ? user?.profilePic : `https://avatar.iran.liara.run/username?username=${user?.username}`} alt="Asakr" className=' w-40 h-40 rounded-full object-cover border-4 border-slate-600' />
                             <div className=' absolute bottom-2 right-4'><svg onClick={() => document.getElementById('my_modal_2').showModal()} className='fill-teal-300 border border-slate-400 cursor-pointer rounded-full' xmlns="http://www.w3.org/2000/svg" width="2em" height="2em" viewBox="0 0 24 24"><path d="M22 16V4c0-1.1-.9-2-2-2H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2m-11-4l2.03 2.71L16 11l4 5H8zM2 6v14c0 1.1.9 2 2 2h14v-2H4V6z"></path></svg></div>
                             <dialog id="my_modal_2" className="modal">
-                                <div className="modal-box">
+                                <div className="modal-box w-[400px] h-[400px]">
                                     <h3 className="font-bold pb-2">Update Image</h3>
-                                    <img src={user?.profilePic} />
+                                    <img src={user?.profilePic} className=' w-full h-[320px] object-cover' />
                                 </div>
                                 <form method="dialog" className="modal-backdrop">
                                     <button>close</button>

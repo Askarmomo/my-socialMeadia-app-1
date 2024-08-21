@@ -7,6 +7,7 @@ import { LuMessageCircle } from "react-icons/lu"
 import { TbRefresh } from "react-icons/tb"
 import { Link } from "react-router-dom";
 import { useEffect, useState } from 'react'
+import { formatDistanceToNow } from "date-fns"
 
 const Post = ({ post }) => {
 
@@ -62,24 +63,54 @@ const Post = ({ post }) => {
 
     }, [post1])
 
+
+
+    const deletePostById = async () => {
+
+        try {
+            const res = await fetch('/api/post/' + post?._id, {
+                method: 'DELETE',
+                headers: { 'Content-Type': 'application/json' },
+            })
+            const data = await res.json()
+
+            if (data.error) {
+                throw new Error(data.error)
+            }
+            toast.success('Post deleted successully')
+        } catch (error) {
+            console.log(error.message);
+
+        }
+
+    }
+
+
+
+
     return (
 
 
 
         <div className='border border-slate-600 p-2 rounded-xl'>
-            <div className='flex items-center justify-between space-x-56 py-3 px-2'>
+            <div className='flex items-center justify-between  py-3 px-2'>
                 <Link to={`/profile/${oneUser?.username}`} >
 
                     <div className='flex items-center space-x-2'>
                         <img src={oneUser?.profilePic ? oneUser?.profilePic : `https://avatar.iran.liara.run/username?username=${oneUser?.username}`} alt='Askar' className=' lg:w-12 lg:h-12 w-20 h-12 rounded-full object-cover' />
                         <div>
                             <div className=' text-sm lg:text-lg'>{oneUser?.username}</div>
-                            <div className=' text-xs lg:text-lg'>{oneUser?.bio}</div>
+                            <div className=' text-xs lg:text-sm'>{oneUser?.bio}</div>
                         </div>
                     </div>
                 </Link>
-                <div>
-                    <span className='lg:text-[14px] text-[10px] '>12m_ago</span>
+                <div className=' flex items-center space-x-1'>
+                    <span className='lg:text-[14px] text-sm  '>{formatDistanceToNow(post1.createdAt)}</span>
+                    {loginuser.username === oneUser?.username &&
+                        <button onClick={deletePostById}>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="1.em" height="1.5em" viewBox="0 0 256 256"><path fill="currentColor" d="M216 50h-42V40a22 22 0 0 0-22-22h-48a22 22 0 0 0-22 22v10H40a6 6 0 0 0 0 12h10v146a14 14 0 0 0 14 14h128a14 14 0 0 0 14-14V62h10a6 6 0 0 0 0-12M94 40a10 10 0 0 1 10-10h48a10 10 0 0 1 10 10v10H94Zm100 168a2 2 0 0 1-2 2H64a2 2 0 0 1-2-2V62h132Zm-84-104v64a6 6 0 0 1-12 0v-64a6 6 0 0 1 12 0m48 0v64a6 6 0 0 1-12 0v-64a6 6 0 0 1 12 0"></path></svg>
+                        </button>
+                    }
                 </div>
             </div>
             <Link to={`/postdetaile/${post1._id}`}>
