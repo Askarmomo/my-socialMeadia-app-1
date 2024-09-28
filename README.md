@@ -1,4 +1,4 @@
-#  Chat-App 
+#  Social-Media-website 
 
 ## Includes Technology's
 * React
