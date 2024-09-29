@@ -17,7 +17,9 @@
     "react-hot-toast": "^2.4.1",
     "react-icons": "^5.2.1",
     "react-image-file-resizer": "^0.4.8",
-    "recoil": "^0.7.7"
+    "react-router-dom": "^6.26.2",
+    "recoil": "^0.7.7",
+    "server": "file:.."
   },
   "devDependencies": {
     "@types/react": "^18.3.3",
@@ -31,6 +33,6 @@
     "eslint-plugin-react-refresh": "^0.4.7",
     "postcss": "^8.4.40",
     "tailwindcss": "^3.4.7",
-    "vite": "^5.3.4"
+    "vite": "^5.4.8"
   }
 }
