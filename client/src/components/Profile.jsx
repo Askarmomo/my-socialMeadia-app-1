@@ -137,8 +137,8 @@ const Profile = () => {
 
 
     return (
-        <div className=" lg:pl-[400px] px-4 lg:pr-36 pt-5">
-            <div className=' flex justify-between items-center space-x-[150px]'>
+        <div className=" lg:pl-[400px] px-4 lg:pr-36 pt-5 mb-20">
+            <div className=' flex justify-between items-center sm:space-x-[150px]'>
                 <div>
                     <div>
                         <div className=' relative max-w-xl'>

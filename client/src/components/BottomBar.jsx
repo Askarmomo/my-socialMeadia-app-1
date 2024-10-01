@@ -15,11 +15,8 @@ const BottomBar = () => {
     }
 
     return (
-        <div className=" items-center flex justify-between w-full px-4 py-2 fixed z-50 bottom-0 bg-slate-800">
+        <div className=" items-center flex justify-between w-full px-4 py-2 fixed z-50 bottom-0 right-0 left-0 bg-slate-800">
 
-            <div className=" cursor-pointer active:text-slate-500">
-                <img src={logInUser.profilePic} className="w-12 h-12 object-cover rounded-full" alt={logInUser.profilePic} />
-            </div>
             <Link to={'/home'}>
                 <div className=" cursor-pointer active:text-slate-500">
                     <svg xmlns="http://www.w3.org/2000/svg" width="3em" height="3em" viewBox="0 0 24 24"><path fill="currentColor" d="M5.692 19V9.946L2.604 12.25L2 11.458L12 4l4.346 3.223V5h1.885v3.639l3.788 2.819l-.603.792l-3.089-2.304V19h-4.52v-5.23h-3.615V19zm4.5-8.994h3.616q0-.704-.542-1.159q-.543-.455-1.266-.455t-1.265.454t-.543 1.16"></path></svg>

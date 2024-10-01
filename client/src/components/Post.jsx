@@ -97,7 +97,7 @@ const Post = ({ post }) => {
                 <Link to={`/profile/${oneUser?.username}`} >
 
                     <div className='flex items-center space-x-2'>
-                        <img src={oneUser?.profilePic ? oneUser?.profilePic : `https://avatar.iran.liara.run/username?username=${oneUser?.username}`} alt='Askar' className=' lg:w-12 lg:h-12 w-20 h-12 rounded-full object-cover' />
+                        <img src={oneUser?.profilePic ? oneUser?.profilePic : `https://avatar.iran.liara.run/username?username=${oneUser?.username}`} alt='Askar' className=' lg:w-12 lg:h-12 w-12 h-12 rounded-full object-cover' />
                         <div>
                             <div className=' text-sm lg:text-lg'>{oneUser?.username}</div>
                             <div className=' text-xs lg:text-sm'>{oneUser?.bio}</div>

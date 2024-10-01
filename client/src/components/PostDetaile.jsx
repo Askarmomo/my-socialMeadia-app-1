@@ -128,7 +128,7 @@ const PostDetaile = () => {
 
 
     return (
-        <div className=" lg:pl-[387px] px-4 lg:pr-[148px] pt-10 ">
+        <div className=" lg:pl-[387px] px-4 lg:pr-[148px] pt-10 pb-20">
             <div className=" border p-3 rounded-xl border-slate-600">
                 <div>
                     <Link to={'/profile/' + user?.username}>
@@ -155,7 +155,7 @@ const PostDetaile = () => {
                     </div>
                     <form onSubmit={replyToPost} className=" flex items-center space-x-1 gap-2 pt-5 border-b border-slate-600 pb-2">
                         <div><img src={loginUser?.profilePic} alt='Askar' className=" w-10 h-10 rounded-full object-cover" /></div>
-                        <div><input value={text} onChange={(e) => setText(e.target.value)} type="text" placeholder=" Post you reply" className=" lg:w-[340px] w-[250px] p-3 rounded-lg bg-slate-800 outline-none" /></div>
+                        <div><input value={text} onChange={(e) => setText(e.target.value)} type="text" placeholder=" Post you reply" className=" smg:w-[340px] sm:w-[250px] sm:p-3 p-1.5 rounded-lg bg-slate-800 outline-none" /></div>
                         <div className=" py-2"><button className=" btn btn-success btn-sm text-white"> Post</button></div>
                     </form>
                     {post?.replies.map((reply) => (

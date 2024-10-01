@@ -79,10 +79,10 @@ const Posts = () => {
 
     return (
         <>
-            <div className=' lg:px-40 px-4 lg:pl-96 pt-1 '>
+            <div className=' lg:px-40 px-4 lg:pl-96 pt-1 mb-20 '>
                 <div className=' flex items-center justify-between px-20 pb-2 pt-4 border-b border-slate-600 mb-4' >
-                    <div className=' font-semibold text-lg border-b-2 border-cyan-400 cursor-pointer'>For You</div>
-                    <div className=' font-semibold text-lg cursor-pointer'>Following</div>
+                    <div className=' font-semibold sm:text-lg border-b-2 border-cyan-400 cursor-pointer'>For You</div>
+                    <div className=' font-semibold sm:text-lg cursor-pointer'>Following</div>
                 </div>
 
                 <div className=' border p-2 rounded-xl border-slate-600 mb-4'>

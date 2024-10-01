@@ -20,7 +20,7 @@ function App() {
 
 
   return (
-    <div className=" min-h-screen mx-auto">
+    <div className=" min-h-screen mx-auto max-w-fit">
       <div className={user ? ' relative lg:flex' : ''}>
         {user ? < SideBar /> : null}
         <Routes>
