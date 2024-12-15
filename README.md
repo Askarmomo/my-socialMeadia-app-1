@@ -5,7 +5,7 @@
 * Tailwind css
 * express js,
 * node js,
-* toast
+* react hot toast
   
 ## functionality's
 * User Login & SingUp
