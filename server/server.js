@@ -31,8 +31,8 @@ app.use('/api/post', postRoute)
 
 app.get('/', (req, res) => {
     res.send('Backend is working!');
-  });
-  
+});
+
 
 // if (process.env.NODE_ENV === "production") {
 //     app.use(express.static(path.join(__dirname, "/client/dist")))
@@ -40,7 +40,7 @@ app.get('/', (req, res) => {
 //         res.sendFile(path.resolve(__dirname, "client", "dist", "index.html"))
 //     })
 // } 
- 
+
 app.listen(PORT, () => {
     console.log('server running on port http://localhost:' + PORT);
     mongoDbConnection()
