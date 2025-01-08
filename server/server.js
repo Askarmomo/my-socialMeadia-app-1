@@ -22,17 +22,15 @@ cloudinary.config({
 
 app.use(bodyParser.json({ limit: '10mb' }))
 app.use(express.json())
-app.use(cors())
+app.use(cors({
+    origin: 'https://my-socialmeadia-app-1server.onrender.com', // Replace with your frontend URL
+    credentials: true,
+  }));
 app.use(cookieParser())
 
 
 app.use('/api/auth', AuthRoute)
 app.use('/api/post', postRoute)
-
-app.get('/', (req, res) => {
-    res.send('Backend is working!');
-});
-
 
 // if (process.env.NODE_ENV === "production") {
 //     app.use(express.static(path.join(__dirname, "/client/dist")))
@@ -40,7 +38,7 @@ app.get('/', (req, res) => {
 //         res.sendFile(path.resolve(__dirname, "client", "dist", "index.html"))
 //     })
 // } 
-
+ 
 app.listen(PORT, () => {
     console.log('server running on port http://localhost:' + PORT);
     mongoDbConnection()
