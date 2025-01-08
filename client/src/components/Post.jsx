@@ -62,6 +62,22 @@ const Post = ({ post }) => {
 
     const [hide, setHide] = useState(false)
 
+    function shareContent() {
+        if (navigator.share) {
+            navigator.share({
+                title: 'Check out this amazing content!',
+                text: 'Here is some interesting content to share.',
+                url: window.location.origin,
+            })
+                .then(() => console.log('Content shared successfully!'))
+                .catch((error) => console.error('Error sharing content:', error));
+        } else {
+            alert('Sharing is not supported on this browser.');
+        }
+    }
+
+
+
     return (
 
         <div className='border border-slate-600 p-2 rounded-xl'>
@@ -100,7 +116,7 @@ const Post = ({ post }) => {
                     </div>
                     <div className=' text-sm'>{post.replies.length}</div>
                 </div>
-                <div> <IoShareSocialOutline className=' text-2xl cursor-pointer' /></div>
+                <div onClick={() => shareContent()}> <IoShareSocialOutline className=' text-2xl cursor-pointer' /></div>
             </div>
         </div >
 
