@@ -6,8 +6,7 @@
   "type": "module",
   "scripts": {
     "server": "nodemon server.js",
-     "start": "node ./src/server/index.js"
-
+    "start": "node server.js"
   },
   "keywords": [],
   "author": "Askar",
