@@ -1,56 +1,61 @@
-import { useEffect, useState } from 'react'
-import PropTypes from 'prop-types'
-import toast from 'react-hot-toast'
+import PropTypes from 'prop-types';
+import { useUserStrore } from '../store/useUserStrore';
+import { useState } from 'react';
 
+const UserBarChild = ({ userData }) => {
+  
+  const { user, handleFollowAndUnfollow } = useUserStrore(); // Removed `loading` from here
+  const [loadingId, setLoadingId] = useState(null); // Track loading per user
 
-const UserBarChild = ({ user }) => {
-
-    const [loginUser1] = useState(JSON.parse(localStorage.getItem('user')))
-    const [follow, setFollow] = useState()
-
-    useEffect(() => {
-        const settingfollow = () => {
-            return setFollow(user?.followers.includes(loginUser1._id) ? true : false)
-        }
-        settingfollow()
-    }, [follow, user])
-
-    const handleFollowAndUnfollow = async (e) => {
-        e.preventDefault()
-        try {
-            const res = await fetch('/api/auth/follow/' + user?._id, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' }
-            })
-
-            const data = await res.json()
-            if (data.error) {
-                throw new Error(data.error)
-            }
-            toast.success(data.message)
-        } catch (error) {
-            toast.error(error.message)
-        }
+  const handleFollowAndUnfollowFunc = async () => {
+    setLoadingId(userData._id); // Set the loading state for the current user
+    try {
+      await handleFollowAndUnfollow(userData); // Ensure this returns a promise
+    } catch (error) {
+      console.error('Follow/Unfollow failed:', error);
+    } finally {
+      setLoadingId(null); // Reset the loading state
     }
+  };
 
-    return (
-        <>
+  const isLoading = loadingId === userData._id;
+  const isFollowing = user.following.includes(userData._id);
 
-            <div className='flex justify-between space-x-16 border border-slate-600 rounded-xl px-4 py-2'>
-                <div className=' flex space-x-2'>
-                    <div><img src={user.profilePic} alt="Moahmmed" className=' size-10 rounded-full object-cover' /></div>
-                    <div className=' font-semibold'>{user.username}</div>
-                </div>
-                <div>
-                    <div onClick={handleFollowAndUnfollow}>{follow ? <button className=' w-24 btn btn-sm text-white'>unfollow</button> : <button className=' w-24 btn btn-accent btn-sm text-white'>Follow</button>}</div>
-                </div>
-            </div>
-        </>
-    )
-}
+  return (
+    <div className='flex justify-between space-x-16 border border-slate-600 rounded-xl px-4 py-2'>
+      <div className='flex items-center space-x-2'>
+        <div className='w-10 h-10'>
+          <img
+            src={userData.profilePic}
+            alt={userData.username}
+            className='w-10 h-10 rounded-full object-cover'
+          />
+        </div>
+        <div className='font-semibold text-sm'>{userData.username}</div>
+      </div>
+      <div>
+        <button
+          onClick={handleFollowAndUnfollowFunc}
+          disabled={isLoading}
+          className={`w-24 btn btn-sm text-white ${
+            isFollowing ? '' : 'btn-accent'
+          }`}
+        >
+          {isLoading ? (
+            <span className='loading loading-spinner'></span>
+          ) : isFollowing ? (
+            'Unfollow'
+          ) : (
+            'Follow'
+          )}
+        </button>
+      </div>
+    </div>
+  );
+};
 
-export default UserBarChild
+export default UserBarChild;
 
 UserBarChild.propTypes = {
-    user: PropTypes.object
-}
+  userData: PropTypes.object.isRequired, // Mark `userData` as required
+};

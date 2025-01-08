@@ -1,42 +1,21 @@
-import { useEffect, useState } from 'react'
+
 import UserBarChild from './UserBarChild'
+import { useUserStrore } from '../store/useUserStrore'
 
 const UsersBar = () => {
-    const [users, setUsers] = useState([])
 
-    useEffect(() => {
-
-        const getAllUsers = async () => {
-
-            try {
-
-                const res = await fetch('/api/auth/allusers')
-                const data = await res.json()
-                if (data.error) {
-                    throw new Error(data.error)
-                }
-
-                setUsers(data)
-            } catch (error) {
-                console.log(error.message);
-
-            }
-
-        }
-        getAllUsers()
-
-    }, [users])
+    const { allusers } = useUserStrore()
 
     return (
-        <>
-            <div className='border-l border-slate-500 pt-10 pl-3 space-y-2 hidden lg:block'>
-                {
-                    users.map((user) => (
-                        <UserBarChild key={user._id} user={user} />
-                    ))
-                }
-            </div>
-        </>
+
+        <div className=' basis-[100px] hidden lg:block border-l border-slate-500 px-2 space-y-2 pt-20'>
+            {
+                allusers.map((userData) => (
+                    <UserBarChild key={userData._id} userData={userData} />
+                ))
+            }
+        </div>
+
     )
 }
 

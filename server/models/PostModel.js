@@ -38,12 +38,16 @@ const postSchema = new Schema({
         },
         username: {
             type: String
-        }
-    }]
+        },
+        createdAt: { type: Date, default: Date.now }
+
+    }],
+    
 
 }, { timestamps: true })
 
 const Post = mongoose.model('post', postSchema)
 
 export default Post
+
 

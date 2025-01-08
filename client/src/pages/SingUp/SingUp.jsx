@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom'
 import img from '../../assets/view-3d-businessman_23-2150709832.avif'
 import { useState } from 'react'
-import useSingUp from '../../hooks/useSingUp'
+import { useUserStrore } from '../../store/useUserStrore'
 
 function SingUp() {
     const [input, setInputs] = useState({
@@ -10,7 +10,7 @@ function SingUp() {
         password: '',
         confirmPassword: ''
     })
-    const { loading, singUp } = useSingUp()
+    const { loading, singUp } = useUserStrore()
 
     const handleSubmit = async (e) => {
         e.preventDefault()

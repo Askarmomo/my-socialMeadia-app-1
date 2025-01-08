@@ -1,5 +1,5 @@
 import express from 'express'
-import { allUsers, fallowUnFallowUser, getOneuser, getUserById, logInUser, logOutUser, singUpUser, updateUser } from '../controllers/AuthController.js'
+import { allUsers, fallowUnFallowUser, getOneuser, getUserById, getUserProfile, logInUser, logOutUser, singUpUser, updateUser } from '../controllers/AuthController.js'
 import { protuctRoute } from '../middleware/protuctRoute.js'
 
 const AuthRoute = express.Router()
@@ -12,6 +12,6 @@ AuthRoute.put('/updateuser/:id', protuctRoute, updateUser)
 AuthRoute.get('/userbyid/:id', getUserById)
 AuthRoute.get('/user/:username', getOneuser)
 AuthRoute.get('/allusers', protuctRoute, allUsers)
-
+AuthRoute.get('/profile',protuctRoute,getUserProfile)
 
 export default AuthRoute

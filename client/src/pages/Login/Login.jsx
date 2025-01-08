@@ -2,7 +2,7 @@
 import { Link } from 'react-router-dom'
 import img from '../../assets/view-3d-businessman_23-2150709832.avif'
 import { useState } from 'react'
-import useLogIn from '../../hooks/useLogIn'
+import { useUserStrore } from '../../store/useUserStrore.js'
 
 
 const Login = () => {
@@ -13,10 +13,9 @@ const Login = () => {
         password: ''
     })
 
-    const { loading, logIn } = useLogIn()
+    const { loading, logIn } = useUserStrore()
 
-    const handleSubmit = async (e) => {
-        e.preventDefault()
+    const logInFunc = async () => {
         await logIn(input)
     }
 
@@ -27,7 +26,7 @@ const Login = () => {
                 <div>
                     <img src={img} alt={'SingUp'} className=' lg:block hidden h-96 rounded' />
                 </div>
-                <form onSubmit={handleSubmit} className=' w-full lg:w-72'>
+                <div className=' w-full lg:w-72'>
                     <div className=" text-xl font-semibold text-center pb-7">Login</div>
                     <div className=" space-y-4">
 
@@ -57,12 +56,12 @@ const Login = () => {
                             </svg>
                             <input value={input.password} onChange={(e) => setInputs({ ...input, password: e.target.value })} type="password" className="grow" placeholder="password" />
                         </label>
-                        <button className=" btn btn-accent btn-sm w-full font-semibold">{loading ? <span className=' loading loading-spinner'></span> : 'Login'}</button>
+                        <button onClick={logInFunc} className=" btn btn-accent btn-sm w-full font-semibold">{loading ? <span className=' loading loading-spinner'></span> : 'Login'}</button>
                         <div>
                             <p> <span className='text-[14px] text-center pl-2'>Not Have An Account ? </span><Link to='/singUp' className=' font-semibold cursor-pointer text-cyan-400 hover:underline'>sing up</Link></p>
                         </div>
                     </div>
-                </form>
+                </div>
             </div>
         </div>
     )

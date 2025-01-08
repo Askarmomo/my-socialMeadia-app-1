@@ -2,6 +2,7 @@ import User from "../models/AuthModel.js";
 import bcrypt from 'bcrypt'
 import { generateToken } from "../utils/generateToken.js";
 import { v2 as cloudinary } from 'cloudinary'
+import jwt from "jsonwebtoken"
 
 // completed
 // completed
@@ -50,20 +51,19 @@ export const logInUser = async (req, res) => {
 
         const user = await User.findOne({ email })
         const isValidPassword = await bcrypt.compare(password, user?.password || "")
+        console.log(user);
+        console.log(isValidPassword);
 
         if (!user || !isValidPassword) {
             return res.status(400).json({ error: 'invalid email or password' })
         }
+        console.log(user);
 
-        generateToken(user._id, res) 
+        if (user) {
+            generateToken(user._id, res)
+            return res.status(200).json(user)
+        }
 
-        res.status(200).json({
-            _id: user._id,
-            username: user.username,
-            email: user.email,
-            profilePic: user.profilePic,
-            bio: user.bio,
-        })
 
 
     } catch (error) {
@@ -105,13 +105,13 @@ export const fallowUnFallowUser = async (req, res) => {
         const isfollowing = currentUser.following.includes(userToModify._id)
 
         if (isfollowing) {
-            await User.findByIdAndUpdate(currentUser._id, { $pull: { following: userToModify._id } })
+            const LoginUser = await User.findByIdAndUpdate(currentUser._id, { $pull: { following: userToModify._id } })
             await User.findByIdAndUpdate(userToModify._id, { $pull: { followers: currentUser._id } })
-            res.status(200).json({ message: 'Unfollowed successfully' })
+            res.status(200).json(LoginUser)
         } else {
-            await User.findByIdAndUpdate(currentUser._id, { $push: { following: userToModify._id } })
+            const LoginUser = await User.findByIdAndUpdate(currentUser._id, { $push: { following: userToModify._id } })
             await User.findByIdAndUpdate(userToModify._id, { $push: { followers: currentUser._id } })
-            res.status(200).json({ message: 'Followed successfully' })
+            res.status(200).json(LoginUser)
         }
 
     } catch (error) {
@@ -159,6 +159,7 @@ export const updateUser = async (req, res) => {
 
         await currentUser.save()
         currentUser.password = null
+
         res.status(200).json(currentUser)
     } catch (error) {
         res.status(500).json({ error: 'Internal server error' })
@@ -171,7 +172,8 @@ export const getOneuser = async (req, res) => {
 
     const { username } = req.params
     try {
-        const user = await User.findOne({ username }).select('-password').select('-updatedAt')
+        const user = await User.findOne({ username: username }).select('-password').select('createdAt')
+
 
         if (!user) {
             return res.status(400).json({ error: 'user not found' })
@@ -191,13 +193,13 @@ export const getUserById = async (req, res) => {
 
     try {
 
-        if (id !== "undefined") { 
+        if (id !== "undefined") {
 
             const user = await User.findOne({ _id: id }).select('-password')
             if (!user) {
                 return res.status(400).json({ error: 'user not found' })
             }
-            res.status(200).json(user)
+            return res.status(200).json(user)
         }
     } catch (error) {
         res.status(500).json({ error: 'internal server error' })
@@ -231,6 +233,25 @@ export const allUsers = async (req, res) => {
         console.log('Error in allUser', error.message);
         res.status(500).json({ error: 'Internal server error' })
 
+    }
+
+}
+
+export const getUserProfile = async (req, res) => {
+
+    const userId = req.user._id
+    try {
+
+        const user = await User.findById(userId).select('-password')
+
+        if (!user) {
+            return res.status('Unauthorized User')
+        }
+        res.status(200).json(user)
+
+    } catch (error) {
+        console.log('Error in getUserProfile', error.message);
+        res.status(500).json({ error: 'Internal server error' })
     }
 
 }
