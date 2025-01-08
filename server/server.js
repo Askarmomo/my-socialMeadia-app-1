@@ -29,6 +29,11 @@ app.use(cookieParser())
 app.use('/api/auth', AuthRoute)
 app.use('/api/post', postRoute)
 
+app.get('/', (req, res) => {
+    res.send('Backend is working!');
+  });
+  
+
 // if (process.env.NODE_ENV === "production") {
 //     app.use(express.static(path.join(__dirname, "/client/dist")))
 //     app.get("*", (req, res) => {
