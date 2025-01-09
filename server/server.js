@@ -25,7 +25,7 @@ app.use(express.json())
 app.use(cors({
     origin: 'https://my-socialmeadia-app-1server.onrender.com',
     credentials: true,
-  }));
+}));
 app.use(cookieParser())
 
 
@@ -37,8 +37,8 @@ if (process.env.NODE_ENV === "production") {
     app.get("*", (req, res) => {
         res.sendFile(path.resolve(__dirname, "client", "dist", "index.html"))
     })
-} 
- 
+}
+
 app.listen(PORT, () => {
     console.log('server running on port http://localhost:' + PORT);
     mongoDbConnection()

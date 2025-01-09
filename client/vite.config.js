@@ -8,7 +8,7 @@ export default defineConfig({
     port: 3000,
     proxy: {
       '/api': {
-        target: 'https://my-socialmeadia-app-1server.onrender.com',
+        target: process.env.NODE_ENV = 'development' ? "http://localhost:4000" : 'https://my-socialmeadia-app-1server.onrender.com',
         changeOrigin: true,
         secure: false
       }

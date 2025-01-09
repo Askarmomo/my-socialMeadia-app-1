@@ -39,7 +39,7 @@ function App() {
     <div className=" bg-slate-950 flex items-center justify-center min-h-screen">
       <div className={` ${!user ? "" : 'flex h-screen justify-center w-full'}`}>
         {user ? < SideBar /> : null}
-        <div className={` ${!user ? "" : 'basis-[750px] lg:px-[80px] pb-20 px-10 overflow-x-auto'}`} style={{ scrollbarWidth: 'none' }}>
+        <div className={` ${!user ? "" : 'basis-[750px] lg:px-[80px] pb-20 sm:px-10 px-4 overflow-x-auto'}`} style={{ scrollbarWidth: 'none' }}>
           <Routes>
             <Route path="/" element={user ? <Navigate to={'/home'} /> : <Login />} />
             <Route path="/login" element={user ? <Navigate to={'/home'} /> : <Login />} />
