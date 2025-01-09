@@ -28,7 +28,7 @@ export const usePostStore = create((set) => (
 
         },
         createPost: async ({ text, imgurl, postedBy }) => {
-            if (text.lennth > 1 && imgurl && postedBy) {
+            if (text.lennth < 1 && imgurl && postedBy) {
                 try {
                     const res = await fetch('/api/post/create', {
                         method: 'POST',
