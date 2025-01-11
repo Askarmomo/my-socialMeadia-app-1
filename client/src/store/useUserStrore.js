@@ -91,8 +91,8 @@ export const useUserStrore = create((set) => (
                 if (data.error) {
                     throw new Error(data.error)
                 }
-                window.location.reload()
                 toast.success("logout successfully")
+                window.location.reload()
             } catch (error) {
                 toast.error(error.message)
 
@@ -143,7 +143,7 @@ export const useUserStrore = create((set) => (
         },
         handleFollowAndUnfollow: async (userData) => {
             try {
-                set({ loading: true })
+
                 const res = await fetch('/api/auth/follow/' + userData?._id, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' }
@@ -166,7 +166,7 @@ export const useUserStrore = create((set) => (
                         loginUser.following = [...loginUser.following, anotherUser._id]
                         anotherUser.followers = [...anotherUser.followers, loginUser._id]
                     }
-                    
+
                     const filteredUser = prevState.allusers.map((user) => user._id === anotherUser._id ? { ...user, ...anotherUser } : user)
                     return { user: loginUser, allusers: filteredUser }
                 })
@@ -174,8 +174,6 @@ export const useUserStrore = create((set) => (
             } catch (error) {
                 console.log(error);
                 toast.error(error.message)
-            } finally {
-                set({ loading: false })
             }
         }
 

@@ -6,15 +6,15 @@ export const protuctRoute = async (req, res, next) => {
     try {
         const token = req.cookies.token
 
-        if (!token) {
+        if (token) {
+            const decoded = jwt.decode(token, process.env.JWT_SECRET)
+            const user = await User.findById(decoded.userId)
+            req.user = user
+            next()
+        } else {
             res.status(400).json({ error: "Unothurized user" })
         }
 
-        const decoded = jwt.decode(token, process.env.JWT_SECRET)
-        const user = await User.findById(decoded.userId)
-        req.user = user
-
-        next()
     } catch (error) {
         res.status(500).json({ error: 'Internal server error' })
         console.log('Error in protuctRoute', error.message);

@@ -5,7 +5,6 @@ import { v2 as cloudinary } from 'cloudinary'
 import jwt from "jsonwebtoken"
 
 // completed
-// completed
 export const singUpUser = async (req, res) => {
     const { username, email, password, profilePic } = req.body
 
@@ -51,13 +50,10 @@ export const logInUser = async (req, res) => {
 
         const user = await User.findOne({ email })
         const isValidPassword = await bcrypt.compare(password, user?.password || "")
-        console.log(user);
-        console.log(isValidPassword);
 
         if (!user || !isValidPassword) {
             return res.status(400).json({ error: 'invalid email or password' })
         }
-        console.log(user);
 
         if (user) {
             generateToken(user._id, res)

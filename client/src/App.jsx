@@ -12,11 +12,12 @@ import { useEffect } from "react"
 import { usePostStore } from "./store/PostStore"
 import FollowingPage from "./pages/FollowingPage"
 import SerachPages from "./pages/SerachPages"
+import Loading from "./components/Loading"
 
 
 function App() {
 
-  const { user, getUserProfile, getAllUsers } = useUserStrore()
+  const { user, getUserProfile, getAllUsers, loading } = useUserStrore()
   const { getAllPost } = usePostStore()
 
   useEffect(() => {
@@ -39,6 +40,7 @@ function App() {
     <div className=" bg-slate-950 flex items-center justify-center min-h-screen">
       <div className={` ${!user ? "" : 'flex h-screen justify-center w-full'}`}>
         {user ? < SideBar /> : null}
+        {loading && <Loading />}
         <div className={` ${!user ? "" : 'basis-[750px] lg:px-[80px] pb-20 sm:px-10 px-4 overflow-x-auto'}`} style={{ scrollbarWidth: 'none' }}>
           <Routes>
             <Route path="/" element={user ? <Navigate to={'/home'} /> : <Login />} />

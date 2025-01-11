@@ -19,7 +19,7 @@ function SingUp() {
     }
 
     return (
-        <div className=' lg:pt-20 pt-40 px-4'>
+        <div className=' lg:pt-20 pt-20 px-4'>
 
             <div className=' lg:flex items-center justify-center lg:max-w-2xl lg:space-x-5 mx-auto p-3 rounded-xl border border-gray-600' >
                 <div>
